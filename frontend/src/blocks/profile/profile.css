@@ -1,0 +1,16 @@
+.profile {
+    width: 100%;
+    color: white;
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: 120px 1fr 150px;
+    align-items: center;
+    position: relative;
+}
+
+@media (max-width: 650px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+    }
+}

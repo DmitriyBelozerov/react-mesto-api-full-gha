@@ -1,0 +1,5 @@
+@media (max-width: 530px) {
+    .form__title_confirmation-delete {
+        padding-bottom: 0;
+    }
+}

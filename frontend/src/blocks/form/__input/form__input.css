@@ -1,0 +1,17 @@
+.form__input {
+    background: none;
+    box-shadow: none;
+    color: black;
+    margin-top: 30px;
+    padding: 0;
+    background-size: cover;
+    height: 30px;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+}

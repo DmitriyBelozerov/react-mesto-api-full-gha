@@ -1,0 +1,13 @@
+.form__title {
+    font-size: 24px;
+    font-weight: 900;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 530px) {
+    .form__title {
+        font-size: 18px;
+        padding-bottom: 40px;
+    }
+}

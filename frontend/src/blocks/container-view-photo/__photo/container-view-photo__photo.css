@@ -1,0 +1,4 @@
+.container-view-photo__photo {
+    max-height: inherit;
+    max-width: 100%;
+}

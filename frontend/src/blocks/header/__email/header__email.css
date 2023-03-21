@@ -1,0 +1,14 @@
+.header__email {
+    padding: 0;
+    margin-top: 10px;
+    color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media (max-width: 500px) {
+    .header__email {
+        align-items: center;
+    }
+}

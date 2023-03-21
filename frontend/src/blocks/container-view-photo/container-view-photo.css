@@ -1,0 +1,7 @@
+.container-view-photo {
+    max-width: 75vw;
+    max-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

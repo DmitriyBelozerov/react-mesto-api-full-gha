@@ -1,0 +1,8 @@
+.container-view-photo__title {
+    padding: 0;
+    margin-top: 10px;
+    font-size: 12px;
+    color: white;
+    font-weight: 400;
+    width: fit-content;
+}

@@ -1,0 +1,10 @@
+.form_type_confirmation-delete {
+    min-height: 181px;
+}
+
+@media (max-width: 530px) {
+    .form_confirmation-delete {
+        min-height: 150px;
+ 
+    }
+}

@@ -1,0 +1,22 @@
+.form {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 430px;
+    min-height: 330px;
+    border-radius: 10px;
+    position: relative;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 530px) {
+    .form {
+        width: 282px;
+        min-height: 322px;
+        padding:25px 22px 25px 22px;
+        justify-content: flex-start;
+    }
+    
+}

@@ -1,0 +1,10 @@
+.form__question-sign-in {
+    text-decoration: none;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
+}
+
+.form__question-sign-in:hover {
+    opacity: 0.6;
+}

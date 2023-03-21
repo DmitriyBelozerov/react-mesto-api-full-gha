@@ -1,0 +1,15 @@
+.header__title {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 0;
+    margin: 10px 0 0 20px;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
+}
+
+.header__title:hover {
+    opacity: 0.6;
+}

@@ -1,0 +1,9 @@
+.popup_type_sign {
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+}

@@ -1,0 +1,11 @@
+.form__submit_confirmation-delete {
+    margin-top: 38px;
+}
+
+@media (max-width: 530px) {
+    .form__submit_confirmation-delete {
+        font-size: 14px;
+        height: 46px;
+        margin-top: 38px;
+    }
+}
