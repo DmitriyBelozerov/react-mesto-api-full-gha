@@ -4,9 +4,11 @@ const UserAccessError = require('../errors/user-access-err');
 const ValidationError = require('../errors/validation-err');
 
 const NO_ERRORS = 200;
+const NO_ERRORS_CREATED = 201;
 
 const getCards = (req, res, next) => {
   Card.find({})
+    .populate(['owner', 'likes'])
     .then((cards) => {
       res.status(NO_ERRORS).send(cards);
     })
@@ -17,7 +19,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      res.status(NO_ERRORS).send({ data: card });
+      res.status(NO_ERRORS_CREATED).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -36,7 +38,7 @@ const deleteCard = (req, res, next) => {
       } else if (!card.owner.equals(req.user._id)) {
         throw new UserAccessError('Нельзя удалять карточки других пользователей');
       } else {
-        Card.findByIdAndRemove(req.params.cardId)
+        Card.deleteOne(card)
           .then(() => {
             res.status(NO_ERRORS).send({ data: card });
           })
@@ -44,7 +46,7 @@ const deleteCard = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при удалении карточки'));
       } else {
         next(err);

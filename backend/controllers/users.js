@@ -23,7 +23,7 @@ const login = (req, res, next) => {
         token,
         { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true },
       )
-        .send({ user });
+        .send({ token });
     })
     .catch(next);
 };
@@ -67,7 +67,7 @@ const getUserById = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при запросе пользователя'));
       } else {
         next(err);
@@ -113,7 +113,7 @@ const updateUser = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при обновлении профиля пользователя'));
       } else {
         next(err);
@@ -126,12 +126,12 @@ const updateAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Запрашиваемый пользователь не найден'));
+        return new NotFoundError('Запрашиваемый пользователь не найден');
       }
       res.status(NO_ERRORS).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new ValidationError('Переданы некорректные данные при обновлении аватара пользователя'));
       } else {
         next(err);
