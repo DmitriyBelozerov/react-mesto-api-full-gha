@@ -54,8 +54,8 @@ const deleteCard = (req, res, next) => {
     });
 };
 
-const likeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
+const updateCard = (req, res, next, option) => {
+  Card.findByIdAndUpdate(req.params.cardId, option, { new: true })
     .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
@@ -73,23 +73,12 @@ const likeCard = (req, res, next) => {
     });
 };
 
+const likeCard = (req, res, next) => {
+  updateCard(req, res, next, { $addToSet: { likes: req.user._id } });
+};
+
 const deletelikeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
-    .populate(['owner', 'likes'])
-    .then((card) => {
-      if (!card) {
-        throw new NotFoundError(`Карточка c данным ID: ${req.params.cardId} не найдена`);
-      } else {
-        res.status(NO_ERRORS).send({ data: card });
-      }
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new ValidationError('Переданы некорректные данные при удалении лайка карточки'));
-      } else {
-        next(err);
-      }
-    });
+  updateCard(req, res, next, { $pull: { likes: req.user._id } });
 };
 
 module.exports = {

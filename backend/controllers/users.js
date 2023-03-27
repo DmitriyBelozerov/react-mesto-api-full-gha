@@ -23,7 +23,7 @@ const login = (req, res, next) => {
         token,
         { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true },
       )
-        .send({ token });
+        .send({ message: 'Вы успешно авторизированы!' });
     })
     .catch(next);
 };
@@ -45,8 +45,8 @@ const getUsers = (req, res, next) => {
     .catch(next);
 };
 
-const findUser = (req, res, next, info) => {
-  User.findById(info)
+const findUser = (req, res, next, id) => {
+  User.findById(id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
