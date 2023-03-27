@@ -1,8 +1,6 @@
 {
   "env": {
-    "browser": false,
-    "commonjs": false,
-    "es2021": false
+    "es2021": true
   },
   "extends": "airbnb-base",
   "overrides": [],
@@ -11,9 +9,6 @@
   },
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "no-console": "warn",
-    "func-names": "warn",
-    "prefer-arrow-callback": "off",
-    "consistent-return": "off"
+    "no-console": "warn"
   }
 }

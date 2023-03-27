@@ -45,23 +45,11 @@ const getUsers = (req, res, next) => {
     .catch(next);
 };
 
-const getСurrentUser = (req, res, next) => {
-  User.findById(req.user._id)
+const findUser = (req, res, next, info) => {
+  User.findById(info)
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Текущий пользователь не найден'));
-      } else {
-        res.status(NO_ERRORS).send({ data: user });
-      }
-    })
-    .catch(next);
-};
-
-const getUserById = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Запрашиваемый пользователь не найден');
+        throw new NotFoundError('Пользователь не найден');
       } else {
         res.status(NO_ERRORS).send({ data: user });
       }
@@ -73,6 +61,14 @@ const getUserById = (req, res, next) => {
         next(err);
       }
     });
+};
+
+const getСurrentUser = (req, res, next) => {
+  findUser(req, res, next, req.user._id);
+};
+
+const getUserById = (req, res, next) => {
+  findUser(req, res, next, req.params.userId);
 };
 
 const createUser = (req, res, next) => {
@@ -102,12 +98,11 @@ const createUser = (req, res, next) => {
     });
 };
 
-const updateUser = (req, res, next) => {
-  const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+const findUserForUpdated = (req, res, next, info) => {
+  User.findByIdAndUpdate(req.user._id, info, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь с указанным _id не найден');
+        throw new NotFoundError('Пользователь не найден');
       } else {
         res.status(NO_ERRORS).send({ data: user });
       }
@@ -121,22 +116,14 @@ const updateUser = (req, res, next) => {
     });
 };
 
+const updateUser = (req, res, next) => {
+  const { name, about } = req.body;
+  findUserForUpdated(req, res, next, { name, about });
+};
+
 const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then((user) => {
-      if (!user) {
-        return new NotFoundError('Запрашиваемый пользователь не найден');
-      }
-      res.status(NO_ERRORS).send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new ValidationError('Переданы некорректные данные при обновлении аватара пользователя'));
-      } else {
-        next(err);
-      }
-    });
+  findUserForUpdated(req, res, next, { avatar });
 };
 
 module.exports = {
