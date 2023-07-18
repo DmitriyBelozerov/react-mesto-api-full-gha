@@ -8,7 +8,7 @@ function InfoTooltip(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             title={props.title}
-            logo={<img src={props.logo} alt={'лого'} className='form__logo'/>}
+            logo={<img src={props.logo} alt='лого' className='form__logo'/>}
             name={'InfoTooltip'}>
         </PopupWithForm>
     )

@@ -206,15 +206,12 @@ function App() {
           </Header>
 
           <Switch>
-
             <Route path='/sign-up'>
               <Register onSubmit={register}></Register>
             </Route>
-
             <Route path='/sign-in'>
               <Login onSubmit={handleLogIn}></Login>
             </Route>
-
             <ProtectedRoute exact path='/'
               onEditAvatar={handleEditAvatarClick}
               onEditProfile={handleEditProfileClick}
@@ -225,11 +222,9 @@ function App() {
               onCardDelete={handleConfirmDeletePopup}
               component={Main}
             />
-
             <Route exact path="*">
               {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
             </Route>
-
           </Switch>
 
           <EditProfilePopup
